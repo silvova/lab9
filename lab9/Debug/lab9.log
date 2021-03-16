@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\Володька\Desktop\Проекты\lab9\lab9\main.cpp(38,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  lab9.vcxproj -> C:\Users\Володька\Desktop\Проекты\lab9\Debug\lab9.exe
