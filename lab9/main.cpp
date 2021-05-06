@@ -2,34 +2,38 @@
 #include <stdlib.h>
 #include <time.h>
 #include "matrix.h"
-
-int main() {
+//функция вычисления пермамента марицы
+/*int main() {
 	Matrix A;
 	Matrix B;
-	
+
 	printf("Enter the number of rows 1 of the matrix\n");
-	scanf("%d", &A.row);
-	if (A.row <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &A.row) != 1 || A.row <= 0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 	printf("Enter the number of columns 1 of the matrix\n");
-	scanf("%d", &A.column);
-	if (A.column <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &A.column) != 1 || A.column <= 0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 	printf("Enter the number of rows 2 of the matrix\n");
-	scanf("%d", &B.row);
-	if (B.row <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &B.row) != 1 || B.row <=0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 	printf("Enter the number of columns 2 of the matrix\n");
-	scanf("%d", &B.column);
-	if (B.column <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &B.column) != 1 || B.column <= 0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 	
 	matrix_creating(A);
@@ -56,4 +60,4 @@ int main() {
 	free_matrix(result);
 	
 	return 0;
-}
+}*/

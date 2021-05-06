@@ -28,12 +28,18 @@ Matrix matrix_multiplication(Matrix A, Matrix B) {
 
 void matrix_creating(Matrix& X) {
 	X.matrix = (int**)malloc(X.row * sizeof(int*));
-	for (int i = 0; i < X.row; i++) {
-		X.matrix[i] = (int*)malloc(X.column * sizeof(int));
+	 if (X.matrix) {
+		for (int i = 0; i < X.row; i++) {
+			 X.matrix[i] = (int*)malloc(X.column * sizeof(int));
+			 if (!X.matrix[i]) {
+				 exit(-1);
+			 }
+		}
 	}
+	 else { exit(-1); }
 }
 
-void matrix_filling(Matrix X) {
+void matrix_filling(Matrix& X) {
 	for (int i = 0; i < X.row; i++) {
 		for (int j = 0; j < X.column; j++) {
 			X.matrix[i][j] = rand() % 10;
@@ -41,7 +47,7 @@ void matrix_filling(Matrix X) {
 	}
 }
 
-void matrix_printing(Matrix X) {
+void matrix_printing(Matrix& X) {
 	for (int i = 0; i < X.row; i++) {
 		for (int j = 0; j < X.column; j++) {
 			printf("%d ", X.matrix[i][j]);
@@ -55,4 +61,51 @@ void free_matrix(Matrix& X) {
 		free(X.matrix[i]);
 	}
 	free(X.matrix);
+}
+
+int  permanent_matrix(Matrix& X) {
+	int res = 0;
+	int* a = (int*)malloc(X.column * sizeof(int));
+	int result = step_find(res, a, X, 0);
+	free(a);
+	return result;
+}
+
+int step_find(int& res,int a[], Matrix& X ,int stroka) {
+	int step_res = 0;
+	if (stroka == 0) {
+		for (int i = 0; i < X.column; i++) {
+			a[stroka] = i;
+			res += step_find(res, a, X, stroka + 1);
+		}
+		return res;
+	}
+	for (int i = 0; i < X.column; i++) {
+		if (check(i, a, stroka)) {
+			a[stroka] = i;
+			if (stroka != X.row - 1) {
+				step_find(res, a, X, stroka + 1);
+			}
+			else {
+				step_res = 1;
+				for (int i = 0; i <= stroka; i++) {
+					printf("a pos: %d - %d\n", i, a[i]);
+					step_res *= X.matrix[i][a[i]];
+				}
+				res += step_res;
+			}
+		}
+	}
+	printf("a: %d\n", step_res);
+	return 0;
+}
+bool check(int val, int* mass, int lenght) {
+	bool flag = true;
+	for (int i = 0; i < lenght; i++) {
+		if (val == mass[i]) {
+			flag = false;
+			break;
+		}
+	}
+	return flag;
 }
