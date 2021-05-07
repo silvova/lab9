@@ -9,29 +9,36 @@ int main() {
 	Matrix A;
 
 	printf("Enter the number of rows 1 of the matrix\n");
-	scanf("%d", &A.row);
-	if (A.row <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &A.row) != 1 || A.row <= 0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 	printf("Enter the number of columns 1 of the matrix\n");
-	scanf("%d", &A.column);
-	if (A.column <= 0) {
-		printf("Error, invalid data");
-		return -1;
+	while (scanf("%d", &A.column) != 1 || A.column <= 0) {
+		printf("Error, invalid data. Try again:\n");
+		while (getchar() != '\n') {
+			;
+		}
 	}
 
 	matrix_creating(A);
 
-	srand(3);
+	srand(time(NULL));
 	matrix_filling(A);
 
 	printf("Matrix A\n");
 	matrix_printing(A);
 	printf("\n");
 
-	printf("Permanent of matrix: %d", permanent_matrix(A));
-
+	printf("Calculating permanent...\n");
+	if (A.row <= A.column) {
+		printf("Permanent of matrix: %d", permanent_matrix(A));
+	}
+	else {
+		printf("Error, wrong matrix size for calculating permanent!\n");
+	}
 
 	free_matrix(A);
 

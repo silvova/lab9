@@ -65,40 +65,46 @@ void free_matrix(Matrix& X) {
 
 int  permanent_matrix(Matrix& X) {
 	int res = 0;
-	int* a = (int*)malloc(X.column * sizeof(int));
-	int result = step_find(res, a, X, 0);
-	free(a);
+	int* mass = (int*)malloc(X.column * sizeof(int));
+	int result = step_find(res, mass, X, 0);
+	free(mass);
 	return result;
 }
 
-int step_find(int& res,int a[], Matrix& X ,int stroka) {
-	int step_res = 0;
-	if (stroka == 0) {
+
+//res - результат сложения всех step_res
+//mass[] - массив с индексами строк(показывает, какие позиции в строке свободны)
+//stroka - индекс текущей строки
+int step_find(int& res,int mass[], Matrix& X ,int stroka) {
+	int step_res = 0;//результат умножения одной уникальной последовательности
+	if (stroka == 0) {//для перебора первой строчки
 		for (int i = 0; i < X.column; i++) {
-			a[stroka] = i;
-			res += step_find(res, a, X, stroka + 1);
+			if (X.row == 1) {
+				res += X.matrix[0][i];
+			}
+			mass[stroka] = i;
+			res += step_find(res, mass, X, stroka + 1);
 		}
 		return res;
 	}
-	for (int i = 0; i < X.column; i++) {
-		if (check(i, a, stroka)) {
-			a[stroka] = i;
+	for (int i = 0; i < X.column; i++) {//для подсчета всех вохможных сочетаний с i элементом из первой строки
+		if (check(i, mass, stroka)) {
+			mass[stroka] = i;
 			if (stroka != X.row - 1) {
-				step_find(res, a, X, stroka + 1);
+				step_find(res, mass, X, stroka + 1);
 			}
 			else {
 				step_res = 1;
 				for (int i = 0; i <= stroka; i++) {
-					printf("a pos: %d - %d\n", i, a[i]);
-					step_res *= X.matrix[i][a[i]];
+					step_res *= X.matrix[i][mass[i]];
 				}
 				res += step_res;
 			}
 		}
 	}
-	printf("a: %d\n", step_res);
 	return 0;
 }
+
 bool check(int val, int* mass, int lenght) {
 	bool flag = true;
 	for (int i = 0; i < lenght; i++) {

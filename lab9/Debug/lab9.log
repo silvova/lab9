@@ -1,2 +1,3 @@
-﻿  matrix.cpp
+﻿  main_dop.cpp
+C:\Users\silvo\OneDrive\Рабочий стол\Программирование\Проекты\lab9\lab9\main_dop.cpp(28,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   lab9.vcxproj -> C:\Users\silvo\OneDrive\Рабочий стол\Программирование\Проекты\lab9\Debug\lab9.exe
