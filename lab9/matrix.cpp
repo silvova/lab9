@@ -72,7 +72,6 @@ int  permanent_matrix(Matrix& X) {
 }
 
 
-//res - результат сложения всех step_res
 //mass[] - массив с индексами строк(показывает, какие позиции в строке свободны)
 //stroka - индекс текущей строки
 int step_find(int& res,int mass[], Matrix& X ,int stroka) {
